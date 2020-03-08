@@ -55,7 +55,7 @@ class AgeThing(age: Int)
 data class User(val name: String, val surname: String, val age: AgeThing)
 
 fun test() {
-    val namedUser = User(name = "Namey", "McNameface", age = AgeThing(30), fingers = 10)
+    val namedUser = User("Namey", surname = "McNameface", age = AgeThing(30))
 }
         """
                 )
@@ -64,8 +64,8 @@ fun test() {
             .expect(
                 """
 src/com/jacquessmuts/namedargs/AgeThing.kt:8: Error: Constructer calls should use named elements [NamedArgumentsDetector]
-    val namedUser = User(name = "Namey", "McNameface", age = AgeThing(30), fingers = 10)
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    val namedUser = User("Namey", surname = "McNameface", age = AgeThing(30))
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1 errors, 0 warnings
             """
             )

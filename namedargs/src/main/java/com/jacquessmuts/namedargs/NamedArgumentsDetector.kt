@@ -53,6 +53,7 @@ class NamedArgumentsDetector : Detector(), SourceCodeScanner {
             briefDescription = "Enforces usage of named arguments",
             explanation = "Any constructor with more than 2 arguments need to use named arguments",
             category = Category.CORRECTNESS,
+            priority = 5,
             severity = Severity.ERROR,
             implementation = Implementation(
                 NamedArgumentsDetector::class.java,

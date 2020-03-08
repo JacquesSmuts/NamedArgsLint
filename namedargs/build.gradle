@@ -6,11 +6,11 @@ targetCompatibility = JavaVersion.VERSION_1_7
 sourceCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
-    compileOnly "com.android.tools.lint:lint:26.6.1"
-    compileOnly "com.android.tools.lint:lint-api:26.6.1"
+    compileOnly "com.android.tools.lint:lint:26.5.3"
+    compileOnly "com.android.tools.lint:lint-api:26.5.3"
 
-    testImplementation "com.android.tools.lint:lint-checks:26.6.1"
-    testImplementation "com.android.tools.lint:lint-tests:26.6.1"
+    testImplementation "com.android.tools.lint:lint-checks:26.5.3"
+    testImplementation "com.android.tools.lint:lint-tests:26.5.3"
 }
 
 publish {
@@ -18,22 +18,31 @@ publish {
     groupId = 'com.jacquessmuts'
     repoName = 'NamedArgumentsLinter'
     artifactId = 'namedargslinter'
-    publishVersion = '0.1.0'
+    publishVersion = '0.1.1'
     bintrayUser = 'JacquesSmuts'
     bintrayKey = System.getenv("BINTRAY_KEY")
     desc = 'An added lint-check to force developers to use named arguments'
     website = 'https://github.com/JacquesSmuts/NamedArgsLint'
 }
 
-//test {
-//    reports {
-//        junitXml.enabled = true
-//        junitXml.destination = file("$buildDir/../../build/test-results/preferenceslint")
-//    }
-//}
+test {
+    reports {
+        junitXml.enabled = true
+        junitXml.destination = file("$buildDir/../../build/test-results/preferenceslint")
+    }
+}
 
 jar {
     manifest {
-        attributes('Lint-Registry-v2': 'com.jacquessmuts.namedargs.NamedArgsIssueRegistry')
+        attributes('Lint-Registry-v2': "com.jacquessmuts.namedargs.NamedArgsIssueRegistry")
+        attributes('Lint-Registry': "com.jacquessmuts.namedargs.NamedArgsIssueRegistry")
     }
+}
+
+configurations {
+    lintChecks
+}
+
+dependencies {
+    lintChecks files(jar)
 }
