@@ -28,9 +28,24 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ./gradlew publish
+          name: Publish to Bintray
+          command: ./gradlew build bintrayUpload -PdryRun=false
 workflows:
   test:
     jobs:
       - test
-      - publish
+      - hold:
+          type: approval
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      - publish:
+          requires:
+            - hold
+          filters:
+            branches:
+              only:
+                - master
