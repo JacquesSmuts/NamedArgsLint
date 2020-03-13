@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         val namedUser = User(
             name = "Namey",
             surname = "McNameface",
-            AgeWrapper(30)
+            age = AgeWrapper(30)
         )
     }
 
