@@ -18,7 +18,7 @@ publish {
     groupId = 'com.jacquessmuts'
     repoName = 'NamedArgumentsLinter'
     artifactId = 'namedargslinter'
-    publishVersion = '0.1.1'
+    publishVersion = '0.1.2'
     bintrayUser = 'JacquesSmuts'
     bintrayKey = System.getenv("BINTRAY_KEY")
     desc = 'An added lint-check to force developers to use named arguments'

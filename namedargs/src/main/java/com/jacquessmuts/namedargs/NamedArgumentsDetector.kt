@@ -3,12 +3,10 @@ package io.flatcircle.preferenceslint
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
 import com.intellij.psi.PsiMethod
+import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.uast.*
 
-
 class NamedArgumentsDetector : Detector(), SourceCodeScanner {
-
-    //https://github.com/chrimaeon/lint-nullify/blob/master/checks/src/main/java/com/cmgapps/lint/NullifyAnnotationDetector.java
 
     override fun getApplicableUastTypes(): List<Class<out UElement>>? {
         return listOf(UCallExpression::class.java)
@@ -21,27 +19,20 @@ class NamedArgumentsDetector : Detector(), SourceCodeScanner {
     internal class NamedArgumentsHandler(private val context: JavaContext) : UElementHandler() {
 
         override fun visitCallExpression(node: UCallExpression) {
-            val arguments = node.valueArguments
-            val actualText = node.getContainingDeclaration()?.text
 
-            if (actualText == null || arguments.size <= 1)
+            val arguments = (node.sourcePsi as? KtCallExpression)?.valueArguments
+            if (arguments == null || arguments.size <= 2)
                 return
 
             arguments.forEach { argument ->
-                val startLocation = actualText.indexOf(argument.evaluate().toString(), 0, true)
-
-                if (startLocation < 0)
-                    return@forEach
-
-                if (!actualText.substring((startLocation-3)..startLocation).contains('=') ) {
+                if (!argument.isNamed()) {
                     context.report(
                         issue = ISSUE,
-                        scope = node,
-                        location = context.getLocation(node),
-                        message = "Constructer calls should use named elements"
+                        scope = node as UElement,
+                        location = context.getLocation(node as UElement),
+                        message = "Constructer and function calls should use named elements"
                     )
                 }
-
             }
         }
 
@@ -51,7 +42,7 @@ class NamedArgumentsDetector : Detector(), SourceCodeScanner {
         val ISSUE = Issue.create(
             id = "NamedArgumentsDetector",
             briefDescription = "Enforces usage of named arguments",
-            explanation = "Any constructor with more than 2 arguments need to use named arguments",
+            explanation = "Any constructor with 3 or more arguments need to use named arguments",
             category = Category.CORRECTNESS,
             priority = 5,
             severity = Severity.ERROR,

@@ -29,11 +29,11 @@ class NamedArgumentsDetectorTest : LintDetectorTest() {
                     """
 package com.jacquessmuts.namedargs
 
-class AgeThing(age: Int)
-data class User(val name: String, val surname: String, val age: AgeThing, val fingers: Int)
+class AgeWrapper(age: Int)
+data class User(val name: String, val surname: String, val age: AgeWrapper, val fingers: Int)
 
 fun test() {
-    val namedUser = User(name = "Namey", surname = "McNameface", age = AgeThing(30), fingers = 10)
+    val namedUser = User(name = "Namey", surname = "McNameface", age = AgeWrapper(30), fingers = 10)
 }
         """
                 )
@@ -51,11 +51,11 @@ fun test() {
                     """
 package com.jacquessmuts.namedargs
 
-class AgeThing(age: Int)
-data class User(val name: String, val surname: String, val age: AgeThing)
+class AgeWrapper(age: Int)
+data class User(val name: String, val surname: String, val age: AgeWrapper)
 
 fun test() {
-    val namedUser = User("Namey", surname = "McNameface", age = AgeThing(30))
+    val namedUser = User("Namey", surname = "McNameface", age = AgeWrapper(30))
 }
         """
                 )
@@ -63,9 +63,9 @@ fun test() {
             .run()
             .expect(
                 """
-src/com/jacquessmuts/namedargs/AgeThing.kt:8: Error: Constructer calls should use named elements [NamedArgumentsDetector]
-    val namedUser = User("Namey", surname = "McNameface", age = AgeThing(30))
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/com/jacquessmuts/namedargs/AgeWrapper.kt:8: Error: Constructer and function calls should use named elements [NamedArgumentsDetector]
+    val namedUser = User("Namey", surname = "McNameface", age = AgeWrapper(30))
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1 errors, 0 warnings
             """
             )
