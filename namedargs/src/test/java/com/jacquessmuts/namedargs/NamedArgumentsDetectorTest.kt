@@ -61,10 +61,10 @@ fun test() {
             .run()
             .expect(
                 """
-src/com/jacquessmuts/namedargs/AgeWrapper.kt:8: Error: Constructer and function calls should use named elements [NamedArgumentsDetector]
+src/com/jacquessmuts/namedargs/AgeWrapper.kt:8: Warning: Constructer and function calls should use named elements [NamedArgumentsDetector]
     val namedUser = User("Namey", surname = "McNameface", age = AgeWrapper(30))
                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1 errors, 0 warnings
+0 errors, 1 warnings
             """
             )
     }
