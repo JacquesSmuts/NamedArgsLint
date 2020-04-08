@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 14
+    }
+}
+
+publish {
+    userOrg = 'jacquessmuts'
+    groupId = 'com.jacquessmuts'
+    repoName = 'NamedArgumentsLinter'
+    artifactId = 'namedargslinter'
+    publishVersion = '0.1.3'
+    bintrayUser = 'JacquesSmuts'
+    bintrayKey = System.getenv("BINTRAY_KEY")
+    desc = 'An added lint-check to force developers to use named arguments'
+    website = 'https://github.com/JacquesSmuts/NamedArgsLint'
+}
+
+dependencies {
+    lintPublish project(':namedargs')
+}

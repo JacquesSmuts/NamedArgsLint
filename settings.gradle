@@ -1,3 +1,4 @@
 rootProject.name='NamedArgs'
 include ':app'
 include ':namedargs'
+include ':namedargslint'

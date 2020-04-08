@@ -1,4 +1,4 @@
-package io.flatcircle.preferenceslint
+package com.jacquessmuts.namedargs
 
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*

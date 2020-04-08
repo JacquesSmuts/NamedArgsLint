@@ -4,8 +4,6 @@ import org.junit.Test
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Issue
-import io.flatcircle.preferenceslint.NamedArgumentsDetector
-import org.junit.Ignore
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
