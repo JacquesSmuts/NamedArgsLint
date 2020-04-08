@@ -4,14 +4,13 @@
 Adds lint-warnings if a function or constructor is called without named arguments
 
 ## Usage
-Add this to your dependencies in the modules build.gradle
+Add this to your dependencies in the modules build.gradle. It will provide warnings if you don't use named arguments.
 
 ```groovy
 dependencies {
-    lintChecks 'com.jacquessmuts.namedargslinter:{version}'
+    implementation 'com.jacquessmuts.namedargslinter:{version}'
 }
 ```
-
 
 Adding this check will generate a lint warning whenever you pass more than 1 argument to a function or constructor without using named arguments.
 
