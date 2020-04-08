@@ -24,7 +24,6 @@ jobs:
 
   publish:
     executor: android/android
-
     steps:
       - checkout
       - run:

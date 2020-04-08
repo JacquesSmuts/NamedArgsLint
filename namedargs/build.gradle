@@ -24,15 +24,14 @@ jar {
 test {
     reports {
         junitXml.enabled = true
-        junitXml.destination = file("$buildDir/../../build/test-results/preferenceslint")
+        junitXml.destination = file("$buildDir/../../build/test-results/namedargslint")
     }
 }
 
-
-configurations {
-    lintChecks
-}
-
-dependencies {
-    lintChecks files(jar)
-}
+//configurations {
+//    lintChecks
+//}
+//
+//dependencies {
+//    lintChecks files(jar)
+//}

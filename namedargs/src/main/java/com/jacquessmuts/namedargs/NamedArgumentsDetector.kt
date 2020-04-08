@@ -6,6 +6,7 @@ import com.intellij.psi.PsiMethod
 import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.uast.*
 
+@Suppress("UnstableApiUsage")
 class NamedArgumentsDetector : Detector(), SourceCodeScanner {
 
     override fun getApplicableUastTypes(): List<Class<out UElement>>? {
@@ -45,7 +46,7 @@ class NamedArgumentsDetector : Detector(), SourceCodeScanner {
             explanation = "Any constructor with 3 or more arguments need to use named arguments",
             category = Category.CORRECTNESS,
             priority = 5,
-            severity = Severity.ERROR,
+            severity = Severity.WARNING,
             implementation = Implementation(
                 NamedArgumentsDetector::class.java,
                 Scope.JAVA_FILE_SCOPE
