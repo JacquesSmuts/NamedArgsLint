@@ -14,7 +14,7 @@ bintray {
     key = System.getenv("BINTRAY_KEY")
     pkg {
         userOrg = 'jacquessmuts'
-        repo = 'generic'
+        repo = 'NamedArgumentsLinter'
         name = 'namedargslinter'
     }
     version {
